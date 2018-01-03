@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700");
+
+* {
+  box-sizing: border-box; }
+
+body {
+  background-color: #E9F0F4; }
+
+.column-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 70px; }
+  .column-container .column {
+    width: 320px;
+    background-color: #ffffff;
+    border: 1px solid #DBDBDB; }
+    .column-container .column .column-left {
+      display: inline-block;
+      width: 35px;
+      background-color: #2E3641;
+      height: 36px;
+      float: left; }
+    .column-container .column .column-right {
+      background-color: #2E3641;
+      height: 36px;
+      display: inline-block;
+      width: 283px;
+      border-left: 4px double #454f5c; }
+      .column-container .column .column-right .column-title {
+        color: #dae4eb;
+        font-size: 14px;
+        font-weight: 700;
+        font-family: 'Lato', sans-serif;
+        margin: 0;
+        line-height: 34px;
+        padding-left: 7px; }
+    .column-container .column .column-card-list {
+      padding-left: 0;
+      margin: 0; }
+      .column-container .column .column-card-list .card {
+        list-style-type: none;
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+        border-bottom: 1px solid #DBDBDB;
+        width: 100%;
+        position: relative; }
+        .column-container .column .column-card-list .card .btn-done {
+          width: 15px;
+          height: 15px;
+          margin-left: 10px;
+          margin-right: 10px;
+          opacity: 0.35; }
+        .column-container .column .column-card-list .card .card-description {
+          color: #2e3641;
+          font-size: 12px;
+          font-weight: 400;
+          font-family: 'Lato', sans-serif;
+          border-left: 4px double #F2E3DF;
+          margin: 0;
+          padding: 10px; }
+        .column-container .column .column-card-list .card .btn-delete {
+          background: white;
+          background-repeat: no-repeat;
+          width: 20px;
+          height: 20px;
+          border: none;
+          position: absolute;
+          padding: 0;
+          margin-top: 3px;
+          right: 3px; }
+    .column-container .column .add-card {
+      font-size: 23px;
+      border: none;
+      background-color: white;
+      color: #dae4eb;
+      margin: 0;
+      padding-left: 12px;
+      padding-right: 10px;
+      border-right: 4px double #F2E3DF; }
+
+.card-placeholder {
+  list-style-type: none; }
