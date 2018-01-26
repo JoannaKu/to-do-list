@@ -1,68 +1,61 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
-
 * {
-  box-sizing: border-box; 
-}
+  box-sizing: border-box; }
 body {
-  background-color: #E9F0F4; 
-}
+  background-color: #E9F0F4; }
 .col-2 {
-  width: 16.66%; 
+  width: 16.66%;
   text-align: center;
   border-right: 4px double #F2E3DF;
-  height: 36px;
-}
+  height: 36px; }
 .col-10 {
-  width: 83.33%; 
-  height: 36px;
-}
+  width: 83.33%;
+  height: 36px; }
 .top-col {
-  border-right: 4px double #454f5c;
-}
+  border-right: 4px double #454f5c; }
 .bottom-col {
-  border-right: 4px double #F2E3DF;
-}
+  border-right: 4px double #F2E3DF; }
 [class*="col-"] {
-  float: left; 
-}
+  float: left; }
 .row::after {
   content: "";
   clear: both;
-  display: table; 
-}
+  display: table; }
 #board {
   background-color: #ffffff;
   border: 1px solid #DBDBDB;
   width: 320px;
   margin: 0 auto;
-  margin-top: 30px;
-}
-.title {
-  background-color: #2E3641;
-}
-.title p {
+  margin-top: 30px; }
+#board .title {
+  background-color: #2E3641; }
+#board .title p {
   color: #dae4eb;
   font-size: 14px;
   font-weight: 700;
   font-family: 'Lato', sans-serif;
   margin: 0;
   line-height: 34px;
-  padding-left: 7px;
-}
-li {
+  padding-left: 7px; }
+#board #to-do-list {
+  padding: 0;
+  margin: 0; }
+#board #to-do-list li {
   display: inline-flex;
   align-items: center;
   cursor: pointer;
   border-bottom: 1px solid #DBDBDB;
   width: 100%;
-  position: relative;
-}
-.task-description {
+  position: relative; }
+#board #to-do-list li .task-description {
   margin: 0;
   border-left: 4px double #F2E3DF;
   padding: 7px;
-}
-.btn-delete {
+  color: #2e3641;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif; }
+#board #to-do-list li .btn-delete {
   background: white;
   background-repeat: no-repeat;
   width: 20px;
@@ -70,23 +63,16 @@ li {
   border: none;
   position: absolute;
   margin-top: 3px;
-  right: 3px;
-}
-.btn-done {
+  right: 3px; }
+#board #to-do-list li .btn-done {
   width: 15px;
   height: 15px;
   margin-left: 17px;
   margin-right: 16px;
-  opacity: 0.35; 
-}
-#to-do-list {
-  padding: 0;
-  margin: 0;
-}
-#add-new-task {
-    font-size: 23px;
-    border: none;
-    background-color: white;
-    color: #dae4eb;
-    margin-top: 3px;
-}
+  opacity: 0.35; }
+#board #add-new-task {
+  font-size: 23px;
+  border: none;
+  background-color: white;
+  color: #dae4eb;
+  margin-top: 3px; }

@@ -18,6 +18,7 @@ function getTask(){
             .append($('<p class="task-description">').text(item.task))
             .append($('<button class="btn-delete">').css('background-image', deleteActiveIcon))
             .appendTo(ToDoList);
+
         });
     }
 }
@@ -105,9 +106,21 @@ function doneTask(data) {
     });
 }
 
+function initSortable() {
+    $('#to-do-list').sortable({
+        connectWith: '#to-do-list',
+        placeholder: 'task-placeholder'
+    }).disableSelection();
+}
+
+$(".task").click(function(){
+    $(".task-placeholder");
+});
+
 $(document).ready(function() {
     getTask();
     addHandlerToNewTaskButton();
+    initSortable();
 
     $("ul").on("click", ".btn-delete", addHandlerToDeleteButton);
     $("ul").on("click", ".btn-done", doneTask);
