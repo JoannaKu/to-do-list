@@ -66,7 +66,6 @@ function addHandlerToDeleteButton() {
             data: {delete: $taskElement.text()},
             success: function(){
                 $taskElement.remove();
-
             }
         });
     });
@@ -83,9 +82,9 @@ function doneTask(data) {
                 method: 'POST',
                 data: {update:$taskElement.text(), isdone:1},
                 success: function(){
-                    ($('.task-description')).css('color', '#9eb2c0');
-                    ($('.task-description')).css('text-decoration', 'line-through');
-                    ($('.btn-delete')).css('background-image', deleteDoneIcon);
+                    $taskElement.find($('.task-description')).css('color', '#9eb2c0');
+                    $taskElement.find($('.task-description')).css('text-decoration', 'line-through');
+                    $taskElement.find($('.btn-delete')).css('background-image', deleteDoneIcon);
                 } 
 
             });
@@ -96,9 +95,9 @@ function doneTask(data) {
                 method: 'POST',
                 data: {update:$taskElement.text(), isdone:0},
                 success: function(){
-                    ($('.task-description')).css('color', '#000');
-                    ($('.task-description')).css('text-decoration', 'none');
-                    ($('.btn-delete')).css('background-image', deleteActiveIcon);
+                    $taskElement.find($('.task-description')).css('color', '#000');
+                    $taskElement.find($('.task-description')).css('text-decoration', 'none');
+                    $taskElement.find($('.btn-delete')).css('background-image', deleteActiveIcon);
                 }
             });
         }
