@@ -1,126 +1,110 @@
-var ToDoList = $('#to-do-list');
-var deleteActiveIcon = "url(zadanie/../images/trash.png)";
-var deleteDoneIcon = "url(zadanie/../images/trash2.png)";
+var ToDoList = $('#to-do-list')
+var deleteDoneIcon = "url(../images/trash2.png)"
 
-function getTask(){    
+function getTask () {
     $.ajax({
         url: "http://localhost:3000/tasks",
         method: "GET",
         success: cardList
-    });
+    })
 
-    function cardList(data) {
-
-        data.forEach(function(item) {
-
+    function cardList (data) {
+        data.forEach(function (item) {
             $('<li class="task">')
-            .append($('<input type="checkbox">').addClass('btn-done'))
-            .append($('<p class="task-description">').text(item.task))
-            .append($('<button class="btn-delete">').css('background-image', deleteActiveIcon))
-            .appendTo(ToDoList);
-
-        });
+                .append($('<input type="checkbox" class="btn-done">'))
+                .append($('<p class="task-description">').text(item.task))
+                .append($('<button class="btn-delete">'))
+                .appendTo(ToDoList);
+        })
     }
 }
 
-function addTask(data, success) {    
+function addTask (data, success) {
     $.ajax({
         type: 'POST',
         url: 'http://localhost:3000/tasks',
-        data: {task: data, isdone: 0},
+        data: { task: data, isdone: 0 },
         error: function (err) {
-          console.log(err);
+            console.log(err)
         },
         success: success
-    });
+    })
 }
 
-function addHandlerToNewTaskButton() {
-
-    $('#add-new-task').click(function() {
-        var description = prompt('Enter the name of the card');
+function addHandlerToNewTaskButton () {
+    $('#add-new-task').click(function () {
+        var description = prompt('Enter the name of the card')
 
         if (description) {
-            addTask(description, function(){
+            addTask(description, function () {
                 $('<li class="task">')
-                    .append($('<input type="checkbox">').addClass('btn-done'))
+                    .append($('<input type="checkbox" class="btn-done">'))
                     .append($('<p class="task-description">').text(description))
-                    .append($('<button class="btn-delete">').css('background-image', deleteActiveIcon))
-                    .appendTo(ToDoList);
-            });
+                    .append($('<button class="btn-delete">'))
+                    .appendTo(ToDoList)
+            })
         }
         else {
             alert('You have to put the name of the card. Try again.')
         }
-    });
+    })
 }
 
-function addHandlerToDeleteButton() {
-    $('.btn-delete').click(function(){
+function deleteButtonHandler () {
+    var $taskElement = $(this).parent()
 
-        var $taskElement = $(this).parent();
+    $.ajax({
+        url: "http://localhost:3000/delete",
+        method: 'POST',
+        data: { delete: $taskElement.text() },
+        success: function () {
+            $taskElement.remove()
+        }
+    })
+}
 
+function doneButtonHandler () {
+    var $taskElement = $(this).parent()
+
+    if (this.checked) {
         $.ajax({
-            url: "http://localhost:3000/delete",
+            url: "http://localhost:3000/update1",
             method: 'POST',
-            data: {delete: $taskElement.text()},
-            success: function(){
-                $taskElement.remove();
+            data: { update: $taskElement.text(), isdone: 1 },
+            success: function () {
+                $taskElement.addClass('done')
             }
-        });
-    });
+
+        })
+    }
+    else {
+        $.ajax({
+            url: "http://localhost:3000/update2",
+            method: 'POST',
+            data: { update: $taskElement.text(), isdone: 0 },
+            success: function () {
+                $taskElement.removeClass('done')
+            }
+        })
+    }
 }
 
-function doneTask(data) {
-    $('.btn-done').click(function(){
-
-        var $taskElement = $(this).parent();
-
-        if  (this.checked) {
-            $.ajax({
-                url: "http://localhost:3000/update1",
-                method: 'POST',
-                data: {update:$taskElement.text(), isdone:1},
-                success: function(){
-                    $taskElement.find($('.task-description')).css('color', '#9eb2c0');
-                    $taskElement.find($('.task-description')).css('text-decoration', 'line-through');
-                    $taskElement.find($('.btn-delete')).css('background-image', deleteDoneIcon);
-                } 
-
-            });
-        }
-        else {
-            $.ajax({
-                url: "http://localhost:3000/update2",
-                method: 'POST',
-                data: {update:$taskElement.text(), isdone:0},
-                success: function(){
-                    $taskElement.find($('.task-description')).css('color', '#000');
-                    $taskElement.find($('.task-description')).css('text-decoration', 'none');
-                    $taskElement.find($('.btn-delete')).css('background-image', deleteActiveIcon);
-                }
-            });
-        }
-
-    });
-}
-
-function initSortable() {
+function initSortable () {
     $('#to-do-list').sortable({
         connectWith: '#to-do-list',
         placeholder: 'task-placeholder'
-    }).disableSelection();
+    }).disableSelection()
 }
 
-$(".task").click(function(){
-    $(".task-placeholder");
-});
+$(".task").click(function () {
+    $(".task-placeholder")
+})
 
-$(document).ready(function() {
-    getTask();
-    addHandlerToNewTaskButton();
-    initSortable();
+$(document).ready(function () {
+    getTask()
+    addHandlerToNewTaskButton()
+    initSortable()
 
-    $("ul").on("click", ".btn-delete", addHandlerToDeleteButton);
-    $("ul").on("click", ".btn-done", doneTask);
-});
+    $("ul").on("click", ".btn-delete", deleteButtonHandler)
+    $("ul").on("click", ".btn-done", doneButtonHandler)
+})

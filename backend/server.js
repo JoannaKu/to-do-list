@@ -8,7 +8,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //create database
 db.serialize(function () {
-  db.run("CREATE TABLE IF NOT EXISTS tasks (task TEXT, isdone INTEGER)");
+  // db.run("CREATE TABLE IF NOT EXISTS tasks (task TEXT, isdone INTEGER)");
+  db.run("DELETE FROM tasks");
 });
 
 //handle with error(no 'Access-Control-Allow-Origin') 
